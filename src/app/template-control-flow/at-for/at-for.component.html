@@ -1,0 +1,23 @@
+<style>
+</style>
+
+<h2>Template control flow &#64;for</h2>
+
+
+<h3>Old way</h3>
+
+<ul>
+  <li *ngFor="let user of users">
+    {{ user.name }}
+  </li>
+</ul>
+
+<h3>New way</h3>
+
+<ul>
+  @for (user of users; track user.id) {
+    <li>
+      {{ user.name }}
+    </li>
+  }
+</ul>

@@ -1,0 +1,13 @@
+<h2>output()</h2>
+
+<app-my-button-old
+  name="Old way"
+  (myButtonClick)="addTextToParagraph(paragraph, $event)"
+></app-my-button-old>
+
+<app-my-button-new
+  name="New way"
+  (myButtonClick)="addTextToParagraph(paragraph, $event)"
+></app-my-button-new>
+
+<p #paragraph></p>

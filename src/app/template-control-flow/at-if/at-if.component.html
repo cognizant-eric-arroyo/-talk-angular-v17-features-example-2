@@ -1,0 +1,33 @@
+<style>
+  .admin-chip {
+    border: 3px solid #22CC88;
+    background-color: #88FFAA;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 999px;
+  }
+</style>
+
+<h2>Template control flow &#64;if</h2>
+
+
+<h3>Old way</h3>
+
+<p>ID: {{ user.id }}</p>
+<p>Name: {{ user.name }}</p>
+
+<p *ngIf="user.isAdmin">
+  <span class="admin-chip">Admin</span>
+</p>
+
+
+<h3>New way</h3>
+
+<p>ID: {{ user.id }}</p>
+<p>Name: {{ user.name }}</p>
+
+@if (user.isAdmin) {
+  <p>
+    <span class="admin-chip">Admin</span>
+  </p>
+}

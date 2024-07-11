@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+h3 {
+  color: #3388BB;
+  border-bottom: 1px solid #3388BB;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+}
+
+nav a {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  border-left: none;
+  background-color: #7300ff;
+  padding: 4px 12px;
+  color: white;
+  text-decoration: none;
+}
+
+nav a:first-child {
+  border-top-left-radius: 9999px;
+  border-bottom-left-radius: 9999px;
+}
+
+nav a:last-child {
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+}
+
+nav a:hover {
+  background-color: #a157fb;
+}
+
+nav a:active {
+  background-color: #c89dfb;
+  color: black;
+}
