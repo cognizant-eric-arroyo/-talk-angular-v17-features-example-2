@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
+import { MockDateService } from './mock-date.service';
 
 @Component({
   selector: 'app-get-time-old',
@@ -15,27 +16,17 @@ import { delay, Observable, of } from 'rxjs';
 export class GetTimeOldComponent {
   displayedTimeOld: string = "";
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  changeDetectorRef = inject(ChangeDetectorRef);
+  mockDateService = inject(MockDateService);
 
   refreshTime() {
-    this.getTimeFromBackend()
+    this.mockDateService.getTimeFromBackend()
       .subscribe((time) => {
         console.log("Received time:", time);
-
-        const timeAsText = this.formatTime(time);
-        this.displayedTimeOld = timeAsText
+        this.displayedTimeOld = time;
 
         /* try removing this line */
         this.changeDetectorRef.detectChanges();
-      })
-  }
-
-  getTimeFromBackend(): Observable<Date> {
-    // This represents asking the backend for the current date, with a 1 second delay
-    return of(new Date()).pipe(delay(1000));
-  }
-
-  formatTime(time: Date): string {
-    return `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
+      });
   }
 }

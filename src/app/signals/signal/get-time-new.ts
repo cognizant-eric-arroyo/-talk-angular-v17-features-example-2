@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
+import { MockDateService } from './mock-date.service';
 
 @Component({
   selector: 'app-get-time-new',
@@ -15,22 +16,13 @@ import { delay, Observable, of } from 'rxjs';
 export class GetTimeNewComponent {
   displayedTimeNew = signal<string>("");
 
+  mockDateService = inject(MockDateService);
+
   refreshTime() {
-    this.getTimeFromBackend()
+    this.mockDateService.getTimeFromBackend()
       .subscribe((time) => {
         console.log("Received time:", time);
-
-        const timeAsText = this.formatTime(time);
-        this.displayedTimeNew.set(timeAsText)
+        this.displayedTimeNew.set(time)
       })
-  }
-
-  getTimeFromBackend(): Observable<Date> {
-    // This represents asking the backend for the current date, with a 1 second delay
-    return of(new Date()).pipe(delay(1000));
-  }
-
-  formatTime(time: Date): string {
-    return `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
   }
 }
